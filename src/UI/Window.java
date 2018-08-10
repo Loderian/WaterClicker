@@ -1,6 +1,9 @@
 package UI;
 
 import Core.Game;
+import GameObjects.Clickable;
+import GameObjects.Currency;
+import GameObjects.Producer;
 import GameObjects.Type;
 
 import javax.swing.*;
@@ -10,8 +13,7 @@ import java.awt.event.*;
 public class Window extends WindowAdapter implements ActionListener {
     protected final static String EXIT_GAME = "exit_game";
 
-    protected static WaterLabel waterLabel;
-    protected static WaterProdLabel waterProdLabel;
+    protected static CurrenyDisplay water;
 
     protected JFrame frame;
     protected int maxX = 500;
@@ -22,6 +24,7 @@ public class Window extends WindowAdapter implements ActionListener {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         maxX = screenSize.width - 50;
         maxY = screenSize.width - 50;
+        water = new CurrenyDisplay(0, 0, "assets/255794e8a47f328.jpg", Type.WATER);
     }
 
     public boolean showNewWindow() {
@@ -37,7 +40,7 @@ public class Window extends WindowAdapter implements ActionListener {
         Container contentPane = frame.getContentPane();
         contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 
-        contentPane.add(initWaterUI());
+        contentPane.add(water.getBox());
 
         contentPane.add(Box.createVerticalGlue());
 
@@ -53,40 +56,13 @@ public class Window extends WindowAdapter implements ActionListener {
         return true;
     }
 
-    public Box initWaterUI() {
-        Box box = Box.createVerticalBox();
-
-        waterLabel = new WaterLabel("l");
-        waterLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        box.add(waterLabel);
-
-        waterProdLabel = new WaterProdLabel();
-        waterProdLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        box.add(waterProdLabel);
-
-        ImageIcon waterIcon = new ImageIcon("assets/255794e8a47f328.jpg");
-        Image image = waterIcon.getImage();
-        image = image.getScaledInstance(150, 150, Image.SCALE_SMOOTH);
-        waterIcon = new ImageIcon(image);
-        JLabel waterImg = new JLabel(waterIcon);
-        waterImg.setAlignmentX(Component.CENTER_ALIGNMENT);
-        waterImg.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                Game.getCurrency(Type.WATER).click();
-            }
-        });
-
-        box.add(waterImg);
-        box.add(Box.createHorizontalStrut(5));
-
-        return box;
-    }
 
     public Box initBuildingsUI() {
         Box box = Box.createVerticalBox();
 
+        for(Producer p : Game.getProducers()) {
 
+        }
 
         return box;
     }
@@ -101,8 +77,8 @@ public class Window extends WindowAdapter implements ActionListener {
         }
     }
 
-    public static void updateWater(double amount) {
-        waterLabel.update(amount);
-        waterProdLabel.update();
+    public static void updateWater() {
+        water.updateAmount(Game.getCurrency(Type.WATER).getAmount());
+        water.updateProduction(Game.getCurrency(Type.WATER).getProduction());
     }
 }

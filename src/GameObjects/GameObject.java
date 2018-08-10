@@ -4,6 +4,4 @@ public interface GameObject {
     void update();
 
     void fixedUpdate();
-
-    void click();
 }

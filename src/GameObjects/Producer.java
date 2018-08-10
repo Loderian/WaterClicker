@@ -2,15 +2,16 @@ package GameObjects;
 
 import Core.Game;
 
-abstract public class Producer implements GameObject {
+abstract public class Producer implements GameObject, Clickable {
     protected double production;
-    protected double cost;
-    protected long owned;
     protected Type product;
+
+    protected double cost;
     protected Type costType;
 
+    protected int owned;
 
-    public Producer(double production, double cost, long owned, Type product, Type costType) {
+    public Producer(double production, double cost, int owned, Type product, Type costType) {
         this.production = production;
         this.cost = cost;
         this.owned = owned;
@@ -26,12 +27,26 @@ abstract public class Producer implements GameObject {
         return cost + (cost * owned);
     }
 
+    public Type getProduct() {
+        return product;
+    }
+
     public void buy() {
         Currency c = Game.getCurrency(costType);
         if (c.getAmount() < getCost()) {
             Game.getCurrency(costType).sub(getCost());
         }
         owned++;
+    }
+
+    @Override
+    public void fixedUpdate() {
+        Game.getCurrency(product).add(getProduction()/50);
+    }
+
+    @Override
+    public void click() {
+        buy();
     }
 
     @Override

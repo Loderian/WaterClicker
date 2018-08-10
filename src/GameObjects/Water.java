@@ -2,7 +2,7 @@ package GameObjects;
 
 import UI.Window;
 
-public class Water extends Currency {
+public class Water extends Currency implements Clickable {
     public Water() {
         super(0, Type.WATER);
     }
@@ -14,7 +14,7 @@ public class Water extends Currency {
 
     @Override
     public void update() {
-        Window.updateWater(amount);
+        Window.updateWater();
     }
 
     @Override
