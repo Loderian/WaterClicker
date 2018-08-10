@@ -40,6 +40,7 @@ abstract public class Currency implements GameObject {
             }
         }
 
+        production = prod;
         return prod;
     }
 
@@ -47,7 +48,17 @@ abstract public class Currency implements GameObject {
     public String toString() {
         return "Currency{" +
                 "amount=" + amount +
+                ", production=" + production +
+                ", type=" + type +
                 '}';
+    }
+
+    public String printAmount() {
+        return String.format("%.3f %s %s", amount, getMidfix(), this.type.toString());
+    }
+
+    public String printProd() {
+        return String.format("Per second: %.3f %s", production, Game.getCurrency(this.type).getMidfix());
     }
 
     public String getMidfix() {

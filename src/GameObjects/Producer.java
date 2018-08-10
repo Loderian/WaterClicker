@@ -31,12 +31,20 @@ abstract public class Producer implements GameObject, Clickable {
         return product;
     }
 
+    public Type getCostType() {
+        return costType;
+    }
+
+    public int getOwned() {
+        return owned;
+    }
+
     public void buy() {
         Currency c = Game.getCurrency(costType);
-        if (c.getAmount() < getCost()) {
+        if (c.getAmount() - (getCost() - 0.0000001) >= 0.0) {
             Game.getCurrency(costType).sub(getCost());
+            owned++;
         }
-        owned++;
     }
 
     @Override

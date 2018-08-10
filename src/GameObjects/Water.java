@@ -9,12 +9,11 @@ public class Water extends Currency implements Clickable {
 
     @Override
     public void click() {
-        add(0.001);
+        add(0.1);
     }
 
     @Override
     public void update() {
-        Window.updateWater();
     }
 
     @Override

@@ -1,27 +1,32 @@
 package Core;
 
 import GameObjects.*;
+import UI.AppController;
 import UI.Window;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Timer;
 
-public class Game {
-    static Controller controller = null;
-    static Window gameWindow;
-    static HashMap<String, Producer> producers = new HashMap<>();
-    static HashMap<Type, Currency> currencies = new HashMap<>();
-    volatile static boolean ready = false;
+public class Game extends Application {
+    volatile static Updater controller;
+    volatile static FixedUpdater fixedUpdater;
+    volatile static Window gameWindow;
+    volatile static AppController ui;
+    volatile static HashMap<String, Producer> producers = new HashMap<>();
+    volatile static HashMap<Type, Currency> currencies = new HashMap<>();
+    volatile static boolean ready;
 
     public static void main(String[] args) {
+        ready = false;
         controller = null;
-        System.out.println("Game Start");
-
-        javax.swing.SwingUtilities.invokeLater(() -> {
-            gameWindow = new Window();
-            ready = gameWindow.showNewWindow();
-        });
 
         currencies.put(Type.WATER, new Water());
         producers.put("wd", new WaterDistiller());
@@ -29,18 +34,45 @@ public class Game {
         ArrayList<GameObject> allObjects = new ArrayList<>();
         allObjects.addAll(currencies.values());
         allObjects.addAll(producers.values());
+        controller = new Updater(allObjects);
+        fixedUpdater = new FixedUpdater(allObjects);
 
-        while(!ready) {} //Wait for window
+        launch(args);
 
-        controller = new Controller(allObjects);
-        Thread fixedUpdater = new Thread(controller);
-        fixedUpdater.start();
+        exit();
+    }
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/fxml/main.fxml"));
+            Parent root = loader.load();
+            ui = loader.getController();
+            ui.init();
+            controller.setUI(ui);
+
+            primaryStage.setTitle("Water Clicker");
+            primaryStage.setScene(new Scene(root, 1280, 720));
+            gameWindow = new Window(primaryStage);
+        } catch (IOException e) {
+            e.printStackTrace();
+            exit();
+        }
+
+        System.out.println("Game Start");
+
         controller.start();
+        Thread fixedThread = new Thread(() -> {
+            Timer timer = new Timer();
+            timer.schedule(fixedUpdater, 0, 50);
+        });
+        fixedThread.start();
+
     }
 
     public static void exit() {
         if (controller != null) {
-            Controller.stop();
+            controller.stop();
         }
         for (GameObject obj : producers.values()) {
             System.out.println(obj.toString());
@@ -52,7 +84,7 @@ public class Game {
         System.exit(0);
     }
 
-    public static GameObject getProducer(String key) {
+    public static Producer getProducer(String key) {
         return producers.get(key);
     }
 
@@ -67,4 +99,6 @@ public class Game {
     public static Collection<Currency> getCurrencies() {
         return currencies.values();
     }
+
+
 }
