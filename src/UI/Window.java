@@ -1,8 +1,6 @@
 package UI;
 
 import Core.Game;
-import GameObjects.Clickable;
-import GameObjects.Currency;
 import GameObjects.Producer;
 import GameObjects.Type;
 
@@ -13,7 +11,7 @@ import java.awt.event.*;
 public class Window extends WindowAdapter implements ActionListener {
     protected final static String EXIT_GAME = "exit_game";
 
-    protected static CurrenyDisplay water;
+    protected static CurrencyDisplay water;
 
     protected JFrame frame;
     protected int maxX = 500;
@@ -24,7 +22,7 @@ public class Window extends WindowAdapter implements ActionListener {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         maxX = screenSize.width - 50;
         maxY = screenSize.width - 50;
-        water = new CurrenyDisplay(0, 0, "assets/255794e8a47f328.jpg", Type.WATER);
+        water = new CurrencyDisplay(0, 0, "assets/water.jpg", Type.WATER);
     }
 
     public boolean showNewWindow() {
