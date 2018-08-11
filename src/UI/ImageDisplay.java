@@ -1,30 +1,32 @@
 package UI;
 
-import javax.swing.*;
-import java.awt.*;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.*;
+import javafx.util.Builder;
 
-public class ImageDisplay {
-    protected JLabel image;
+public class ImageDisplay implements Builder<Node> {
+    protected ImageView image;
 
-    public ImageDisplay(int w, int h, String imagePath) {
-        this.image = new JLabel(scaleImage(w, h, imagePath));
+    public ImageDisplay(double w, double h, String imagePath) {
+        Image image = new Image(imagePath);
+        this.image = new ImageView(image);
+        this.image.setPreserveRatio(true);
+        this.image.setFitWidth(w);
+        this.image.setFitHeight(h);
     }
 
-    public ImageIcon scaleImage(int w, int h, String imagePath) {
-        ImageIcon icon = new ImageIcon(imagePath);
-        Image image = icon.getImage();
-        image = image.getScaledInstance(w, h, Image.SCALE_SMOOTH);
-        return new ImageIcon(image);
+    public ImageDisplay(String id, double w, double h, String imagePath) {
+        Image image = new Image(imagePath);
+        this.image = new ImageView(image);
+        this.image.setPreserveRatio(true);
+        this.image.setFitWidth(w);
+        this.image.setFitHeight(h);
+        this.image.setId(id);
     }
 
-    public void updateImage(String imagePath) {
-        this.image.setIcon(scaleImage(150, 150, imagePath));
-    }
-
-    public Box getBox() {
-        Box box = Box.createHorizontalBox();
-        box.add(image);
-
-        return box;
+    @Override
+    public Node build() {
+        return this.image;
     }
 }

@@ -14,6 +14,7 @@ public class Water extends Currency implements Clickable {
 
     @Override
     public void update() {
+        super.update();
     }
 
     @Override

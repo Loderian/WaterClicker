@@ -1,18 +1,19 @@
 package UI;
 
-import javax.swing.*;
-import java.awt.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 
-public class Label extends JLabel {
+
+public class GameText extends Text {
     private static String fontName = null;
     private int fontSize;
 
-    public Label(int fontSize) {
+    public GameText(int fontSize) {
         super("");
         setFont(makeFont(fontSize));
     }
 
-    public Label(String text, int fontSize) {
+    public GameText(String text, int fontSize) {
         super(text);
         setFont(makeFont(fontSize));
     }
@@ -21,7 +22,7 @@ public class Label extends JLabel {
         if (fontName == null) {
             loadFont();
         }
-        return new Font(fontName, Font.PLAIN, fontSize);
+        return new Font(fontName, fontSize);
     }
 
     public static void loadFont() {

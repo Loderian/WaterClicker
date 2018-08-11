@@ -29,7 +29,8 @@ public class Game extends Application {
         controller = null;
 
         currencies.put(Type.WATER, new Water());
-        producers.put("wd", new WaterDistiller());
+
+        producers.put("Bucket", new Producer("Bucket", 0.1, 1.0, 0, Type.WATER, Type.WATER));
 
         ArrayList<GameObject> allObjects = new ArrayList<>();
         allObjects.addAll(currencies.values());
@@ -64,7 +65,7 @@ public class Game extends Application {
         controller.start();
         Thread fixedThread = new Thread(() -> {
             Timer timer = new Timer();
-            timer.schedule(fixedUpdater, 0, 50);
+            timer.schedule(fixedUpdater, 0, 20);
         });
         fixedThread.start();
 

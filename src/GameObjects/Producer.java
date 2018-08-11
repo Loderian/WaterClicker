@@ -2,7 +2,9 @@ package GameObjects;
 
 import Core.Game;
 
-abstract public class Producer implements GameObject, Clickable {
+public class Producer implements GameObject, Clickable {
+    protected final String name;
+
     protected double production;
     protected Type product;
 
@@ -11,7 +13,8 @@ abstract public class Producer implements GameObject, Clickable {
 
     protected int owned;
 
-    public Producer(double production, double cost, int owned, Type product, Type costType) {
+    public Producer(final String name, double production, double cost, int owned, Type product, Type costType) {
+        this.name = name;
         this.production = production;
         this.cost = cost;
         this.owned = owned;
@@ -20,6 +23,10 @@ abstract public class Producer implements GameObject, Clickable {
     }
 
     public double getProduction() {
+        return production;
+    }
+
+    public double getTotalProduction() {
         return production * owned;
     }
 
@@ -39,17 +46,26 @@ abstract public class Producer implements GameObject, Clickable {
         return owned;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void buy() {
         Currency c = Game.getCurrency(costType);
-        if (c.getAmount() - (getCost() - 0.0000001) >= 0.0) {
+        if (c.getBank() - (getCost() - 0.0000001) >= 0.0) {
             Game.getCurrency(costType).sub(getCost());
             owned++;
         }
     }
 
     @Override
+    public void update() {
+
+    }
+
+    @Override
     public void fixedUpdate() {
-        Game.getCurrency(product).add(getProduction()/50);
+        Game.getCurrency(product).add(getTotalProduction()/50);
     }
 
     @Override

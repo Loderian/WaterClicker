@@ -1,50 +1,41 @@
 package UI;
 
-import javax.swing.*;
-import java.awt.*;
+import Core.Game;
+import GameObjects.Producer;
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+
 
 public class BuildingDisplay extends ImageDisplay {
-    protected Label name;
-    protected Label amount;
-    protected Label cost;
+    protected GameText name;
+    protected GameText owned;
+    protected GameText cost;
+    protected Producer producer;
 
-    public BuildingDisplay(String name, int amount, double cost, String imagePath) {
+    public BuildingDisplay(String name, String imagePath) {
         super(50, 50, imagePath);
-
-        this.name = new Label(name, 18);
-        this.name.setAlignmentX(Container.CENTER_ALIGNMENT);
-        this.name.setAlignmentY(Component.TOP_ALIGNMENT);
-
-        this.cost = new Label(18);
-        this.cost.setAlignmentX(Container.CENTER_ALIGNMENT);
-        this.cost.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        updateCost(cost);
-
-        this.amount = new Label(35);
-        this.amount.setAlignmentX(Container.RIGHT_ALIGNMENT);
-        updateAmount(amount);
+        this.producer = Game.getProducer(name);
+        this.name = new GameText(producer.getName(), 14);
+        this.cost = new GameText("" + producer.getCost(), 14);
+        this.owned = new GameText("" + producer.getOwned(), 35);
     }
 
-    private void updateCost(double cost) {
-        this.cost.setText(String.format("%.3f", cost));
+    public void updateCost() {
+        this.cost.setText("" + producer.getCost());
     }
 
-    public void updateAmount(int amount) {
-        this.amount.setText("" + amount);
+    public void updateOwned() {
+        this.owned.setText("" + producer.getOwned());
     }
 
-    public Box getBox() {
-        Box box = super.getBox();
-        box.setAlignmentX(Component.LEFT_ALIGNMENT);
+    @Override
+    public Node build() {
+        VBox nameBox = new VBox(name, cost);
 
-        Box nameBox = Box.createVerticalBox();
-        box.add(name);
-        box.add(cost);
-        nameBox.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        box.add(nameBox);
-
-        box.add(amount);
+        HBox box = new HBox(super.build(), nameBox, owned);
+        box.setSpacing(10);
+        box.setOnMouseClicked(event -> producer.buy());
 
         return box;
     }

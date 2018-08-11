@@ -1,47 +1,46 @@
 package UI;
 
-import Core.Game;
-import GameObjects.Clickable;
 import GameObjects.Type;
 import javafx.fxml.FXML;
-import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class AppController {
     @FXML
-    private Text waterBank;
+    private GridPane mainGrid;
 
-    @FXML
-    private Text waterProd;
-
-    @FXML
-    private ImageView waterImage;
-
-    @FXML
-    private ImageView waterDistillerImage;
-
-    @FXML
-    private Text wdCost;
-
-    @FXML
-    private Text wdAmount;
+    private List<CurrencyDisplay> currencies;
+    private List<BuildingDisplay> buildings;
 
 
     public void init() {
-        waterImage.setOnMouseClicked(event -> ((Clickable) Game.getCurrency(Type.WATER)).click());
-        waterDistillerImage.setOnMouseClicked(event -> (Game.getProducer("wd")).buy());
+        CurrencyDisplay waterDisplay = new CurrencyDisplay("assets/water.jpg", Type.WATER);
+        currencies = new ArrayList<>();
+        currencies.add(waterDisplay);
+
+        mainGrid.add(waterDisplay.build(), 0, 0);
+
+        BuildingDisplay buildingDisplay = new BuildingDisplay("Bucket", "assets/bucket.png");
+        this.buildings = new ArrayList<>();
+        this.buildings.add(buildingDisplay);
+
+        VBox buildings = new VBox();
+        buildings.getChildren().add(buildingDisplay.build());
+
+        mainGrid.add(buildings, 1, 0);
     }
 
-    @FXML
-    public void updateWater() {
-        waterBank.setText(Game.getCurrency(Type.WATER).printAmount());
-        Game.getCurrency(Type.WATER).calcProduction();
-        waterProd.setText(Game.getCurrency(Type.WATER).printProd());
-    }
-
-    @FXML
-    public void updateWaterDistiller() {
-        wdCost.setText(String.format("Cost: %.3f", Game.getProducer("wd").getCost()));
-        wdAmount.setText(String.format("%d", Game.getProducer("wd").getOwned()));
+    public void update() {
+        for (CurrencyDisplay c : currencies) {
+            c.updateBank();
+            c.updateProduction();
+        }
+        for (BuildingDisplay b : buildings) {
+            b.updateCost();
+            b.updateOwned();
+        }
     }
 }

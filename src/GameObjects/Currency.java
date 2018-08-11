@@ -5,60 +5,64 @@ import Core.Game;
 import java.util.Collection;
 
 abstract public class Currency implements GameObject {
-    protected double amount;
+    protected double bank;
     protected double production;
     protected Type type;
 
-    public Currency(double amount, Type type) {
-        this.amount = amount;
+    public Currency(double bank, Type type) {
+        this.bank = bank;
         this.type = type;
-        this.production = calcProduction();
+        calcProduction();
+    }
+
+    @Override
+    public void update() {
+        calcProduction();
     }
 
     public void add(double amount) {
-        this.amount += amount;
+        this.bank += amount;
     }
 
     public void sub(double amount) {
-        this.amount -= amount;
+        this.bank -= amount;
     }
 
-    public double getAmount() {
-        return amount;
+    public double getBank() {
+        return bank;
     }
 
     public double getProduction() {
         return production;
     }
 
-    public double calcProduction() {
+    public void calcProduction() {
         Collection<Producer> producers = Game.getProducers();
         double prod = 0.0;
         for(Producer p : producers) {
             if (p.getProduct() == this.type) {
-                prod += p.getProduction();
+                prod += p.getTotalProduction();
             }
         }
 
         production = prod;
-        return prod;
     }
 
     @Override
     public String toString() {
         return "Currency{" +
-                "amount=" + amount +
+                "bank=" + bank +
                 ", production=" + production +
                 ", type=" + type +
                 '}';
     }
 
     public String printAmount() {
-        return String.format("%.3f %s %s", amount, getMidfix(), this.type.toString());
+        return String.format("%.3f %s %s", bank, getMidfix(), this.type.toString());
     }
 
     public String printProd() {
-        return String.format("Per second: %.3f %s", production, Game.getCurrency(this.type).getMidfix());
+        return String.format("Per second: %.3f %s", production, getMidfix());
     }
 
     public String getMidfix() {

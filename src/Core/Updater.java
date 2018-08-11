@@ -19,9 +19,8 @@ public class Updater extends AnimationTimer {
     public void handle(long now) {
         for (GameObject obj : objects) {
             obj.update();
-            ui.updateWater();
-            ui.updateWaterDistiller();
         }
+        ui.update();
     }
 
     public void setUI(AppController ui) {
