@@ -1,2 +1,2 @@
 # WaterClicker
-Learning Java
+Learning Java UI and game programming.
