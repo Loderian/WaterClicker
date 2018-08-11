@@ -2,7 +2,7 @@ package GameObjects;
 
 import Core.Game;
 
-public class Producer implements GameObject, Clickable {
+public class Producer extends Ordered implements GameObject, Clickable, Comparable<Producer> {
     protected final String name;
 
     protected double production;
@@ -13,7 +13,8 @@ public class Producer implements GameObject, Clickable {
 
     protected int owned;
 
-    public Producer(final String name, double production, double cost, int owned, Type product, Type costType) {
+    public Producer(final String name, final int pos, double production, double cost, int owned, Type product, Type costType) {
+        super(pos);
         this.name = name;
         this.production = production;
         this.cost = cost;
@@ -82,5 +83,11 @@ public class Producer implements GameObject, Clickable {
                 ", product=" + product +
                 ", costType=" + costType +
                 '}';
+    }
+
+
+    @Override
+    public int compareTo(Producer o) {
+        return (int) (this.production - o.production);
     }
 }

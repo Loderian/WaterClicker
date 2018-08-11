@@ -10,7 +10,7 @@ import javafx.scene.text.Text;
 import javafx.util.Builder;
 
 
-public class CurrencyDisplay extends ImageDisplay {
+public class CurrencyDisplay extends ImageDisplay implements Comparable<CurrencyDisplay> {
     protected GameText bank;
     protected GameText production;
     protected Type type;
@@ -42,5 +42,10 @@ public class CurrencyDisplay extends ImageDisplay {
         box.setAlignment(Pos.CENTER);
 
         return box;
+    }
+
+    @Override
+    public int compareTo(CurrencyDisplay o) {
+        return this.currency.getPos() - o.currency.getPos();
     }
 }

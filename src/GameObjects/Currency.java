@@ -4,12 +4,13 @@ import Core.Game;
 
 import java.util.Collection;
 
-abstract public class Currency implements GameObject {
+abstract public class Currency extends Ordered implements GameObject {
     protected double bank;
     protected double production;
     protected Type type;
 
-    public Currency(double bank, Type type) {
+    public Currency(final int pos, double bank, Type type) {
+        super(pos);
         this.bank = bank;
         this.type = type;
         calcProduction();

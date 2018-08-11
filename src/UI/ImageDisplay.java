@@ -29,4 +29,17 @@ public class ImageDisplay implements Builder<Node> {
     public Node build() {
         return this.image;
     }
+
+    static String getImagePath(String name) {
+        switch (name) {
+            case "Bucket":
+                return "assets/bucket.png";
+
+            case "Water Distiller":
+                return "assets/waterdistiller.jpg";
+
+            default:
+                return "";
+        }
+    }
 }
