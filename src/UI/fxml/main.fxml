@@ -21,6 +21,9 @@
     </VBox>
     <VBox fx:id="buildingsBox" alignment="TOP_CENTER"
           GridPane.columnIndex="2" GridPane.rowIndex="0">
-
+        <HBox fx:id="buildingMenu" GridPane.hgrow="ALWAYS" prefHeight="30"
+              style="-fx-background-color: lightblue;">
+            <Text text="Menu" />
+        </HBox>
     </VBox>
 </GridPane>

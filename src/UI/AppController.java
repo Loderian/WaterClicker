@@ -4,7 +4,9 @@ import Core.Game;
 import GameObjects.Producer;
 import GameObjects.Type;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -26,9 +28,11 @@ public class AppController {
     @FXML
     private VBox buildingsBox;
 
+    @FXML
+    private HBox buildingMenu;
+
     private List<CurrencyDisplay> currencies;
     private List<BuildingDisplay> buildings;
-
 
     public void init(Stage window) {
         currencyBox.prefHeightProperty().bind(window.widthProperty());
@@ -56,12 +60,15 @@ public class AppController {
         Collections.sort(buildings);
 
         for(BuildingDisplay bd : buildings) {
-            buildingsBox.getChildren().add(bd.build());
+            Node bNode = bd.build();
+            HBox hoverBox = bd.buildHover();
+            hoverBox.setTranslateY(buildingMenu.getPrefHeight());
+            middleBox.getChildren().add(hoverBox);
+            BuildingDisplay.addHover(bNode, hoverBox);
+
+            buildingsBox.getChildren().add(bNode);
         }
-
     }
-
-
 
     public void update() {
         for (CurrencyDisplay c : currencies) {

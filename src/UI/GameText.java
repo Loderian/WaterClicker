@@ -5,7 +5,7 @@ import javafx.scene.text.Text;
 
 
 public class GameText extends Text {
-    private static String fontName = null;
+    private String fontName = null;
     private int fontSize;
 
     public GameText(int fontSize) {
@@ -18,6 +18,12 @@ public class GameText extends Text {
         setFont(makeFont(fontSize));
     }
 
+    public GameText(String text, String fontName, int fontSize) {
+        super(text);
+        this.fontName = fontName;
+        this.fontSize = fontSize;
+    }
+
     private Font makeFont(int fontSize) {
         if (fontName == null) {
             loadFont();
@@ -25,7 +31,7 @@ public class GameText extends Text {
         return new Font(fontName, fontSize);
     }
 
-    public static void loadFont() {
+    public void loadFont() {
         fontName = "Courier";
     }
 }
