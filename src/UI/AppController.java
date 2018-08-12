@@ -72,12 +72,10 @@ public class AppController {
 
     public void update() {
         for (CurrencyDisplay c : currencies) {
-            c.updateBank();
-            c.updateProduction();
+            c.update();
         }
         for (BuildingDisplay b : buildings) {
-            b.updateCost();
-            b.updateOwned();
+            b.update();
         }
     }
 }

@@ -19,6 +19,9 @@ public class BuildingDetails implements Builder<HBox>{
         this.stats = new GameText(stats, 14);
     }
 
+    public void update(String stats) {
+        this.stats.setText(stats);
+    }
 
     @Override
     public HBox build() {

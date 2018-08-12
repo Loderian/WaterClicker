@@ -28,11 +28,8 @@ public class CurrencyDisplay extends ImageDisplay implements Comparable<Currency
         }
     }
 
-    public void updateBank() {
+    public void update() {
         this.bank.setText(currency.printAmount());
-    }
-
-    public void updateProduction() {
         this.production.setText(currency.printProd());
     }
 

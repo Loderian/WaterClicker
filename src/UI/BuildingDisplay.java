@@ -29,12 +29,10 @@ public class BuildingDisplay extends ImageDisplay implements Comparable<Building
         this.details = new BuildingDetails(producer.getName(), "Desc", getStats());
     }
 
-    public void updateCost() {
+    public void update() {
         this.cost.setText("" + producer.getCost());
-    }
-
-    public void updateOwned() {
         this.owned.setText("" + producer.getOwned());
+        this.details.update(getStats());
     }
 
     public HBox buildHover() {
@@ -42,7 +40,7 @@ public class BuildingDisplay extends ImageDisplay implements Comparable<Building
     }
 
     public String getStats() {
-        String str = "Produces: " + producer.getProduction() + producer.getProduct().toString() + " per second.\n";
+        String str = "Produces: " + producer.getProduction() + " " + producer.getProduct().toString() + " per second.\n";
         str += "Total production: " + producer.getTotalProduction();
         return str;
     }
