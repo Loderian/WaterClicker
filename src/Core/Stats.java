@@ -1,5 +1,7 @@
 package Core;
 
+import GameObjects.Currency;
+
 public class Stats {
     private GameTime playtime;
 
@@ -17,6 +19,11 @@ public class Stats {
 
     @Override
     public String toString() {
-        return getPlaytime();
+        String str = "";
+        for (Currency c : Game.getCurrencies()) {
+            str += String.format("Total %s collected: %.3f %s\n", c.getType(), c.getTotal(), c.getMidfix());
+        }
+        str += getPlaytime();
+        return str;
     }
 }

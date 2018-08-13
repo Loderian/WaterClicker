@@ -9,21 +9,24 @@ public class GameText extends Text {
 
     public GameText(int fontSize) {
         super("");
-        setFont(makeFont(fontSize));
+        this.fontSize = fontSize;
+        setFont(makeFont());
     }
 
     public GameText(String text, int fontSize) {
         super(text);
-        setFont(makeFont(fontSize));
+        this.fontSize = fontSize;
+        setFont(makeFont());
     }
 
     public GameText(String text, String fontName, int fontSize) {
         super(text);
         this.fontName = fontName;
         this.fontSize = fontSize;
+        setFont(makeFont());
     }
 
-    private Font makeFont(int fontSize) {
+    private Font makeFont() {
         if (fontName == null) {
             loadFont();
         }

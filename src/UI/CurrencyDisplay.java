@@ -17,8 +17,8 @@ public class CurrencyDisplay extends ImageDisplay implements Comparable<Currency
     public CurrencyDisplay(String imagePath, Type type) {
         super("waterImg", 150, 150, imagePath);
         this.type = type;
-        this.bank = new GameText(35);
-        this.production = new GameText(24);
+        this.bank = new GameText(28);
+        this.production = new GameText(18);
         this.currency = Game.getCurrency(type);
 
         if (this.currency instanceof Clickable) {
@@ -27,7 +27,7 @@ public class CurrencyDisplay extends ImageDisplay implements Comparable<Currency
     }
 
     public void update() {
-        this.bank.setText(currency.printAmount());
+        this.bank.setText(currency.printBank());
         this.production.setText(currency.printProd());
     }
 

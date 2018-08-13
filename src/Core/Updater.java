@@ -21,7 +21,6 @@ public class Updater extends AnimationTimer {
             obj.update();
         }
         ui.update();
-        Game.getStats().updateTime();
     }
 
     public void setUI(AppController ui) {

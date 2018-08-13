@@ -10,4 +10,11 @@ abstract public class Ordered {
     public int getPos() {
         return pos;
     }
+
+    @Override
+    public String toString() {
+        return "Ordered{" +
+                "pos=" + pos +
+                '}';
+    }
 }

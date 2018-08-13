@@ -22,7 +22,7 @@ public class FixedUpdater extends TimerTask {
         }
         updates++;
         if (updates * millis == 1000) {
-            //Game.getStats().updateTime();
+            Game.getStats().updateTime();
             updates = 0;
         }
     }

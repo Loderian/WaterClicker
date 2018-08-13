@@ -39,6 +39,14 @@ abstract public class Currency extends Ordered implements GameObject {
         return production;
     }
 
+    public double getTotal() {
+        return total;
+    }
+
+    public Type getType() {
+        return type;
+    }
+
     public void calcProduction() {
         Collection<Producer> producers = Game.getProducers();
         double prod = 0.0;
@@ -56,12 +64,13 @@ abstract public class Currency extends Ordered implements GameObject {
         return "Currency{" +
                 "bank=" + bank +
                 ", production=" + production +
+                ", total=" + total +
                 ", type=" + type +
-                '}';
+                "} " + super.toString();
     }
 
-    public String printAmount() {
-        return String.format("%.3f %s %s", bank, getMidfix(), this.type.toString());
+    public String printBank() {
+        return String.format("%f %s %s", bank, getMidfix(), this.type.toString());
     }
 
     public String printProd() {
