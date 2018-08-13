@@ -1,7 +1,5 @@
 package GameObjects;
 
-import UI.Window;
-
 public class Water extends Currency implements Clickable {
     public Water() {
         super(0, 0, Type.WATER);

@@ -7,6 +7,7 @@ import java.util.Collection;
 abstract public class Currency extends Ordered implements GameObject {
     protected double bank;
     protected double production;
+    protected double total;
     protected Type type;
 
     public Currency(final int pos, double bank, Type type) {
@@ -23,6 +24,7 @@ abstract public class Currency extends Ordered implements GameObject {
 
     public void add(double amount) {
         this.bank += amount;
+        this.total += amount;
     }
 
     public void sub(double amount) {

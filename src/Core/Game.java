@@ -4,10 +4,12 @@ import GameObjects.*;
 import UI.AppController;
 import UI.Window;
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,13 +22,15 @@ public class Game extends Application {
     volatile static FixedUpdater fixedUpdater;
     volatile static Window gameWindow;
     volatile static AppController ui;
-    volatile static HashMap<String, Producer> producers = new HashMap<>();
-    volatile static HashMap<Type, Currency> currencies = new HashMap<>();
-    volatile static boolean ready;
+    volatile static HashMap<String, Producer> producers;
+    volatile static HashMap<Type, Currency> currencies;
+    volatile static Stats stats;
 
     public static void main(String[] args) {
-        ready = false;
         controller = null;
+        producers = new HashMap<>();
+        currencies = new HashMap<>();
+        stats = new Stats(0);
 
         currencies.put(Type.WATER, new Water());
 
@@ -38,7 +42,7 @@ public class Game extends Application {
         allObjects.addAll(currencies.values());
         allObjects.addAll(producers.values());
         controller = new Updater(allObjects);
-        fixedUpdater = new FixedUpdater(allObjects);
+        fixedUpdater = new FixedUpdater(allObjects, 20);
 
         launch(args);
 
@@ -51,11 +55,14 @@ public class Game extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/UI/fxml/main.fxml"));
             Parent root = loader.load();
             ui = loader.getController();
-            ui.init(primaryStage);
-            controller.setUI(ui);
 
             primaryStage.setTitle("Water Clicker");
             primaryStage.setScene(new Scene(root, 1280, 720));
+
+            ui.init(primaryStage);
+
+            controller.setUI(ui);
+
             gameWindow = new Window(primaryStage);
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,12 +72,12 @@ public class Game extends Application {
         System.out.println("Game Start");
 
         controller.start();
+
         Thread fixedThread = new Thread(() -> {
             Timer timer = new Timer();
-            timer.schedule(fixedUpdater, 0, 20);
+            timer.schedule(fixedUpdater, 0, fixedUpdater.getMillis());
         });
         fixedThread.start();
-
     }
 
     public static void exit() {
@@ -103,5 +110,7 @@ public class Game extends Application {
         return currencies.values();
     }
 
-
+    public static Stats getStats() {
+        return stats;
+    }
 }

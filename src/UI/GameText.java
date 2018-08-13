@@ -3,7 +3,6 @@ package UI;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-
 public class GameText extends Text {
     private String fontName = null;
     private int fontSize;

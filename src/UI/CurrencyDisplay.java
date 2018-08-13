@@ -6,8 +6,6 @@ import GameObjects.Currency;
 import GameObjects.Type;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.util.Builder;
 
 
 public class CurrencyDisplay extends ImageDisplay implements Comparable<CurrencyDisplay> {

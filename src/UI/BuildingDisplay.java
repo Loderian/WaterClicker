@@ -1,12 +1,9 @@
 package UI;
 
-import Core.Game;
 import GameObjects.Producer;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -64,28 +61,19 @@ public class BuildingDisplay extends ImageDisplay implements Comparable<Building
     }
 
     public static void addHover(Node buildingBox, HBox hoverBox) {
-        buildingBox.setOnMouseEntered(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (!hoverBox.isVisible()) {
-                    hoverBox.setVisible(true);
-                }
+        buildingBox.setOnMouseEntered(event -> {
+            if (!hoverBox.isVisible()) {
+                hoverBox.setVisible(true);
             }
         });
-        buildingBox.setOnMouseMoved(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (hoverBox.isVisible()) {
-                    hoverBox.setTranslateY(event.getY());
-                }
+        buildingBox.setOnMouseMoved(event -> {
+            if (hoverBox.isVisible()) {
+                hoverBox.setTranslateY(event.getY());
             }
         });
-        buildingBox.setOnMouseExited(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                if (hoverBox.isVisible()) {
-                    hoverBox.setVisible(false);
-                }
+        buildingBox.setOnMouseExited(event -> {
+            if (hoverBox.isVisible()) {
+                hoverBox.setVisible(false);
             }
         });
     }

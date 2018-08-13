@@ -4,14 +4,14 @@ import Core.Game;
 import GameObjects.Producer;
 import GameObjects.Type;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -26,6 +26,12 @@ public class AppController {
     private VBox middleBox;
 
     @FXML
+    private VBox hoverBox;
+
+    @FXML
+    private Text gameStats;
+
+    @FXML
     private VBox buildingsBox;
 
     @FXML
@@ -34,12 +40,17 @@ public class AppController {
     private List<CurrencyDisplay> currencies;
     private List<BuildingDisplay> buildings;
 
-    public void init(Stage window) {
-        currencyBox.prefHeightProperty().bind(window.widthProperty());
+    public void init(Stage primaryStage) {
+        currencyBox.prefHeightProperty().bind(primaryStage.widthProperty());
         currencyBox.setMinWidth(300);
-        middleBox.prefHeightProperty().bind(window.widthProperty());
-        buildingsBox.prefHeightProperty().bind(window.widthProperty());
+        middleBox.prefHeightProperty().bind(primaryStage.widthProperty());
+        middleBox.setPadding(new Insets(5, 0, 5, 10));
+        buildingsBox.prefHeightProperty().bind(primaryStage.widthProperty());
         buildingsBox.setMinWidth(300);
+
+        hoverBox.setMaxWidth(400);
+
+        buildingMenu.setMinHeight(30);
 
         CurrencyDisplay waterDisplay = new CurrencyDisplay("assets/water.jpg", Type.WATER);
         currencies = new ArrayList<>();
@@ -53,21 +64,25 @@ public class AppController {
 
         currencyBox.getChildren().add(waterDisplay.build());
 
-        this.buildings = new ArrayList<>();
+        buildings = new ArrayList<>();
         for(Producer p : Game.getProducers()) {
-            this.buildings.add(new BuildingDisplay(p, ImageDisplay.getImagePath(p.getName())));
+            buildings.add(new BuildingDisplay(p, ImageDisplay.getImagePath(p.getName())));
         }
+
         Collections.sort(buildings);
 
         for(BuildingDisplay bd : buildings) {
-            Node bNode = bd.build();
+            HBox buildingBox = (HBox) bd.build();
             HBox hoverBox = bd.buildHover();
-            hoverBox.setTranslateY(buildingMenu.getPrefHeight());
-            middleBox.getChildren().add(hoverBox);
-            BuildingDisplay.addHover(bNode, hoverBox);
+            buildingBox.setMaxWidth(300);
+            buildingBox.setMinWidth(300);
 
-            buildingsBox.getChildren().add(bNode);
+            buildingsBox.getChildren().add(buildingBox);
+            this.hoverBox.getChildren().add(hoverBox);
+
+            BuildingDisplay.addHover(buildingBox, hoverBox);
         }
+
     }
 
     public void update() {
@@ -77,5 +92,6 @@ public class AppController {
         for (BuildingDisplay b : buildings) {
             b.update();
         }
+        gameStats.setText(Game.getStats().toString());
     }
 }
