@@ -1,5 +1,6 @@
 package UI;
 
+import Core.GameTime;
 import GameObjects.Producer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,7 +28,7 @@ public class BuildingDisplay extends ImageDisplay implements Comparable<Building
     }
 
     public void update() {
-        this.cost.setText("" + producer.getCost());
+        this.cost.setText("" + GameText.formatDouble(producer.getCost()));
         this.owned.setText("" + producer.getOwned());
         this.details.update(getStats());
     }
@@ -37,8 +38,8 @@ public class BuildingDisplay extends ImageDisplay implements Comparable<Building
     }
 
     public String getStats() {
-        String str = "Produces: " + producer.getProduction() + " " + producer.getProduct().toString() + " per second.\n";
-        str += "Total production: " + producer.getTotalProduction();
+        String str = producer.printProduction();
+        str += producer.printTotalProduction();
         return str;
     }
 

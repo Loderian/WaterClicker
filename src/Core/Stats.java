@@ -21,7 +21,7 @@ public class Stats {
     public String toString() {
         String str = "";
         for (Currency c : Game.getCurrencies()) {
-            str += String.format("Total %s collected: %.3f %s\n", c.getType(), c.getTotal(), c.getMidfix());
+            str += c.printTotal();
         }
         str += getPlaytime();
         return str;

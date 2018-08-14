@@ -37,7 +37,6 @@ public class Game extends Application {
         producers.put("Bucket", new Producer("Bucket", 0, 0.1, 1.0, 0, Type.WATER, Type.WATER));
         producers.put("Water Distiller", new Producer("Water Distiller", 1, 5, 20, 0, Type.WATER, Type.WATER));
 
-
         ArrayList<GameObject> allObjects = new ArrayList<>();
         allObjects.addAll(currencies.values());
         allObjects.addAll(producers.values());

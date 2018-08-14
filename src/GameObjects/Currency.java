@@ -1,6 +1,7 @@
 package GameObjects;
 
 import Core.Game;
+import UI.GameText;
 
 import java.util.Collection;
 
@@ -70,11 +71,15 @@ abstract public class Currency extends Ordered implements GameObject {
     }
 
     public String printBank() {
-        return String.format("%f %s %s", bank, getMidfix(), this.type.toString());
+        return String.format("%s %s %s", GameText.formatDouble(bank), getMidfix(), this.type.toString());
     }
 
     public String printProd() {
-        return String.format("Per second: %.3f %s", production, getMidfix());
+        return String.format("Per second: %s %s", GameText.formatDouble(production), getMidfix());
+    }
+
+    public String printTotal() {
+        return String.format("Total %s collected: %s %s\n", type, GameText.formatDouble(total), getMidfix());
     }
 
     public String getMidfix() {
@@ -89,4 +94,6 @@ abstract public class Currency extends Ordered implements GameObject {
                 return "";
         }
     }
+
+
 }

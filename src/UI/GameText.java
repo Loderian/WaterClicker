@@ -36,4 +36,16 @@ public class GameText extends Text {
     public void loadFont() {
         fontName = "Courier";
     }
+
+
+    public static String formatDouble(double d) {
+        if (d >= 1000000.0) {
+            int exp = (int) Math.log10(d);
+            double digit = d / Math.pow(10, exp);
+            return String.format("%.3fe+%d", digit, exp);
+        }
+        else {
+            return String.format("%.3f", d);
+        }
+    }
 }

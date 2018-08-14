@@ -1,6 +1,7 @@
 package GameObjects;
 
 import Core.Game;
+import UI.GameText;
 
 public class Producer extends Ordered implements GameObject, Clickable, Comparable<Producer> {
     protected final String name;
@@ -57,6 +58,14 @@ public class Producer extends Ordered implements GameObject, Clickable, Comparab
             Game.getCurrency(costType).sub(getCost());
             owned++;
         }
+    }
+
+    public String printProduction() {
+        return String.format("Produces: %s %s per second.\n", GameText.formatDouble(production), product);
+    }
+
+    public String printTotalProduction() {
+        return String.format("Total production: %s", GameText.formatDouble(getTotalProduction()));
     }
 
     @Override
