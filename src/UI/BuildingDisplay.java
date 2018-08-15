@@ -21,8 +21,8 @@ public class BuildingDisplay extends ImageDisplay implements Comparable<Building
     public BuildingDisplay(Producer p, String imagePath) {
         super(50, 50, imagePath);
         this.producer = p;
-        this.name = new GameText(producer.getName(), 20);
-        this.cost = new GameText("" + producer.getCost(), 20);
+        this.name = new GameText(producer.getName(), 14);
+        this.cost = new GameText("" + producer.getCost(), 14);
         this.owned = new GameText("" + producer.getOwned(), 50);
         this.details = new BuildingDetails(producer.getName(), "Desc", getStats());
     }

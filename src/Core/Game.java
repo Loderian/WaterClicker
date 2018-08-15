@@ -1,6 +1,7 @@
 package Core;
 
 import GameObjects.*;
+import GameObjects.Currency;
 import UI.AppController;
 import UI.Window;
 import javafx.application.Application;
@@ -12,10 +13,7 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Timer;
+import java.util.*;
 
 public class Game extends Application {
     volatile static Updater controller;
@@ -35,8 +33,8 @@ public class Game extends Application {
         currencies.put(Type.WATER, new Water());
         currencies.put(Type.MONEY, new Money());
 
-        producers.put("Bucket", new Producer("Bucket", 0, 0.1, 1.0, 0, Type.WATER, Type.WATER));
-        producers.put("Water Distiller", new Producer("Water Distiller", 1, 5, 20, 0, Type.WATER, Type.WATER));
+        producers.put("bucket", new Producer("Bucket", 0, 0.1, 1.0, 0, Type.WATER, Type.WATER));
+        producers.put("waterdistiller", new Producer("Water Distiller", 1, 5, 20, 0, Type.WATER, Type.WATER));
 
         ArrayList<GameObject> allObjects = new ArrayList<>();
         allObjects.addAll(currencies.values());
@@ -106,8 +104,16 @@ public class Game extends Application {
         return producers.values();
     }
 
+    public static Map<String, Producer> getProducersMap() {
+        return producers;
+    }
+
     public static Collection<Currency> getCurrencies() {
         return currencies.values();
+    }
+
+    public static Map<Type, Currency> getCurrenciesMap() {
+        return currencies;
     }
 
     public static Stats getStats() {

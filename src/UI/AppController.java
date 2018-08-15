@@ -1,6 +1,7 @@
 package UI;
 
 import Core.Game;
+import GameObjects.Currency;
 import GameObjects.Producer;
 import GameObjects.Type;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 public class AppController {
     @FXML
@@ -52,9 +54,10 @@ public class AppController {
 
         buildingMenu.setMinHeight(30);
 
-        CurrencyDisplay waterDisplay = new CurrencyDisplay("assets/water.png", Type.WATER);
         currencies = new ArrayList<>();
-        currencies.add(waterDisplay);
+        for(Map.Entry<Type, Currency> m : Game.getCurrenciesMap().entrySet()) {
+            currencies.add(new CurrencyDisplay(ImageDisplay.getImagePath(m.getKey().toString()), m.getValue().getType()));
+        }
 
         Collections.sort(currencies);
 
@@ -62,11 +65,9 @@ public class AppController {
             currencyBox.getChildren().add(cd.build());
         }
 
-        currencyBox.getChildren().add(waterDisplay.build());
-
         buildings = new ArrayList<>();
-        for(Producer p : Game.getProducers()) {
-            buildings.add(new BuildingDisplay(p, ImageDisplay.getImagePath(p.getName())));
+        for(Map.Entry<String, Producer> m : Game.getProducersMap().entrySet()) {
+            buildings.add(new BuildingDisplay(m.getValue(), ImageDisplay.getImagePath(m.getKey())));
         }
 
         Collections.sort(buildings);

@@ -31,15 +31,6 @@ public class ImageDisplay implements Builder<Node> {
     }
 
     static String getImagePath(String name) {
-        switch (name) {
-            case "Bucket":
-                return "assets/bucket.png";
-
-            case "Water Distiller":
-                return "assets/waterdistiller.jpg";
-
-            default:
-                return "";
-        }
+        return "assets/" + name + ".png";
     }
 }
