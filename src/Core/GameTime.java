@@ -36,6 +36,21 @@ public class GameTime {
 
     @Override
     public String toString() {
-        return String.format("Total playtime: %d years, %d days, %d hours, %d minutes and %d seconds", getYears(), getDays(), getHours(), getsMin(), getSeconds());
+        String str = "Total playtime: ";
+        if (seconds > sYears) {
+            return str + String.format("%d years, %d days, %d hours, %d minutes and %d seconds", getYears(), getDays(), getHours(), getsMin(), getSeconds());
+        }
+        else if (seconds > sDays) {
+            return str + String.format("%d days, %d hours, %d minutes and %d seconds", getDays(), getHours(), getsMin(), getSeconds());
+        }
+        else if (seconds > sHours) {
+            return str + String.format("%d hours, %d minutes and %d seconds", getHours(), getsMin(), getSeconds());
+        }
+        else if (seconds > 60) {
+            return str + String.format("%d minutes and %d seconds", getsMin(), getSeconds());
+        }
+        else {
+            return str + String.format("%d seconds", getSeconds());
+        }
     }
 }

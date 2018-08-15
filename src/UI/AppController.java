@@ -52,7 +52,7 @@ public class AppController {
 
         buildingMenu.setMinHeight(30);
 
-        CurrencyDisplay waterDisplay = new CurrencyDisplay("assets/water.jpg", Type.WATER);
+        CurrencyDisplay waterDisplay = new CurrencyDisplay("assets/water.png", Type.WATER);
         currencies = new ArrayList<>();
         currencies.add(waterDisplay);
 

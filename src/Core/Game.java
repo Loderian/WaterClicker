@@ -33,6 +33,7 @@ public class Game extends Application {
         stats = new Stats(0);
 
         currencies.put(Type.WATER, new Water());
+        currencies.put(Type.MONEY, new Money());
 
         producers.put("Bucket", new Producer("Bucket", 0, 0.1, 1.0, 0, Type.WATER, Type.WATER));
         producers.put("Water Distiller", new Producer("Water Distiller", 1, 5, 20, 0, Type.WATER, Type.WATER));

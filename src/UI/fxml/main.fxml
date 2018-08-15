@@ -3,12 +3,13 @@
 <GridPane fx:id="mainGrid" fx:controller="UI.AppController"
           xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" hgap="10" gridLinesVisible="true">
     <VBox fx:id="currencyBox" alignment="TOP_CENTER"
-          GridPane.columnIndex="0" GridPane.rowIndex="0">
+          GridPane.columnIndex="0" GridPane.rowIndex="0"
+          style="-fx-background-color: lightblue;">
 
     </VBox>
     <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0"
           GridPane.hgrow="ALWAYS">
-        <VBox fx:id="middleBox" style="-fx-background-color: lightblue;">
+        <VBox fx:id="middleBox" >
             <Text fx:id="gameStats" />
         </VBox>
         <HBox alignment="BASELINE_RIGHT" GridPane.hgrow="ALWAYS">
@@ -19,8 +20,7 @@
     </StackPane>
     <VBox fx:id="buildingsBox" alignment="TOP_CENTER"
           GridPane.columnIndex="2" GridPane.rowIndex="0">
-        <HBox fx:id="buildingMenu" GridPane.hgrow="ALWAYS"
-              style="-fx-background-color: lightblue;">
+        <HBox fx:id="buildingMenu" GridPane.hgrow="ALWAYS">
             <Text text="Menu" />
         </HBox>
     </VBox>
