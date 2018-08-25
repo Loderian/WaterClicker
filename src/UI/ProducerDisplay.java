@@ -1,6 +1,5 @@
 package UI;
 
-import Core.GameTime;
 import GameObjects.Producer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -10,21 +9,21 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 
-public class BuildingDisplay extends ImageDisplay {
+public class ProducerDisplay extends ImageDisplay {
     protected GameText name;
     protected GameText owned;
     protected GameText cost;
-    protected BuildingDetails details;
+    protected ProducerDetails details;
 
     protected Producer producer;
 
-    public BuildingDisplay(Producer p, String imagePath) {
-        super(50, 50, imagePath);
+    public ProducerDisplay(Producer p, String imageName) {
+        super(50, 50, imageName);
         this.producer = p;
         this.name = new GameText(producer.getName(), 14);
         this.cost = new GameText("" + producer.getCost(), 14);
         this.owned = new GameText("" + producer.getOwned(), 50);
-        this.details = new BuildingDetails(producer.getName(), "Desc", getStats());
+        this.details = new ProducerDetails(producer.getName(), "Desc", getStats());
     }
 
     public void update() {
@@ -45,7 +44,9 @@ public class BuildingDisplay extends ImageDisplay {
 
     @Override
     public Node build() {
-        VBox nameBox = new VBox(name, cost);
+        ImageDisplay costImg = new ImageDisplay(14, 14, producer.getCostType().toString());
+        HBox costBox = new HBox(cost, costImg.build());
+        VBox nameBox = new VBox(name, costBox);
         nameBox.setAlignment(Pos.TOP_LEFT);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
 

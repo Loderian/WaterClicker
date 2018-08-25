@@ -8,16 +8,16 @@ import javafx.util.Builder;
 public class ImageDisplay implements Builder<Node> {
     protected ImageView image;
 
-    public ImageDisplay(double w, double h, String imagePath) {
-        Image image = new Image(imagePath);
+    public ImageDisplay(double w, double h, String imageName) {
+        Image image = new Image(getImagePath(imageName));
         this.image = new ImageView(image);
         this.image.setPreserveRatio(true);
         this.image.setFitWidth(w);
         this.image.setFitHeight(h);
     }
 
-    public ImageDisplay(String id, double w, double h, String imagePath) {
-        Image image = new Image(imagePath);
+    public ImageDisplay(String id, double w, double h, String imageName) {
+        Image image = new Image(getImagePath(imageName));
         this.image = new ImageView(image);
         this.image.setPreserveRatio(true);
         this.image.setFitWidth(w);

@@ -33,8 +33,8 @@ public class Game extends Application {
         currencies.put(Type.WATER, new Water());
         currencies.put(Type.MONEY, new Money());
 
-        producers.put("bucket", new Producer("Bucket", 0.1, 1.0, 0, Type.WATER, Type.WATER));
-        producers.put("waterdistiller", new Producer("Water Distiller", 5, 20, 0, Type.WATER, Type.WATER));
+        producers.put("bucket", new Producer("Bucket", 0.1, 1.0, 0, Type.WATER, Type.MONEY));
+        producers.put("waterdistiller", new Producer("Water Distiller", 5, 20, 0, Type.WATER, Type.MONEY));
 
         ArrayList<GameObject> allObjects = new ArrayList<>();
         allObjects.addAll(currencies.values());

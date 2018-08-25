@@ -13,7 +13,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -40,7 +39,7 @@ public class AppController {
     private HBox buildingMenu;
 
     private List<CurrencyDisplay> currencies;
-    private List<BuildingDisplay> buildings;
+    private List<ProducerDisplay> buildings;
 
     public void init(Stage primaryStage) {
         currencyBox.prefHeightProperty().bind(primaryStage.widthProperty());
@@ -56,14 +55,14 @@ public class AppController {
 
         currencies = new ArrayList<>();
         for(Map.Entry<Type, Currency> m : Game.getCurrenciesMap().entrySet()) {
-            CurrencyDisplay currency = new CurrencyDisplay(ImageDisplay.getImagePath(m.getKey().toString()), m.getValue().getType());
+            CurrencyDisplay currency = new CurrencyDisplay(m.getValue().getType(), m.getKey().toString());
             currencies.add(currency);
             currencyBox.getChildren().add(currency.build());
         }
 
         buildings = new ArrayList<>();
         for(Map.Entry<String, Producer> m : Game.getProducersMap().entrySet()) {
-            BuildingDisplay bd = new BuildingDisplay(m.getValue(), ImageDisplay.getImagePath(m.getKey()));
+            ProducerDisplay bd = new ProducerDisplay(m.getValue(), m.getKey());
             buildings.add(bd);
 
             HBox buildingBox = (HBox) bd.build();
@@ -74,7 +73,7 @@ public class AppController {
             buildingsBox.getChildren().add(buildingBox);
             this.hoverBox.getChildren().add(hoverBox);
 
-            BuildingDisplay.addHover(buildingBox, hoverBox);
+            ProducerDisplay.addHover(buildingBox, hoverBox);
         }
     }
 
@@ -82,7 +81,7 @@ public class AppController {
         for (CurrencyDisplay c : currencies) {
             c.update();
         }
-        for (BuildingDisplay b : buildings) {
+        for (ProducerDisplay b : buildings) {
             b.update();
         }
         gameStats.setText(Game.getStats().toString());

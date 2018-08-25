@@ -15,8 +15,8 @@ public class CurrencyDisplay extends ImageDisplay {
     protected Type type;
     protected Currency currency;
 
-    public CurrencyDisplay(String imagePath, Type type) {
-        super("waterImg", 150, 150, imagePath);
+    public CurrencyDisplay(Type type, String imageName) {
+        super(150, 150, imageName);
         this.type = type;
         this.bank = new GameText(28);
         this.production = new GameText(18);

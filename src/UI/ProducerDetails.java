@@ -8,12 +8,12 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.util.Builder;
 
-public class BuildingDetails implements Builder<HBox>{
+public class ProducerDetails implements Builder<HBox>{
     protected GameText name;
     protected GameText description;
     protected GameText stats;
 
-    public BuildingDetails(String name, String description, String stats) {
+    public ProducerDetails(String name, String description, String stats) {
         this.name = new GameText(name, 18);
         this.description = new GameText(description, 14);
         this.stats = new GameText(stats, 14);

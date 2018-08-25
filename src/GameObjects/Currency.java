@@ -105,10 +105,10 @@ abstract public class Currency implements GameObject {
     static double getRate(Type sell) {
         switch (sell) {
             case WATER:
-                return 0.1;
+                return 1;
 
             case FOOD:
-                return 0.5;
+                return 5;
         }
         return 0;
     }
