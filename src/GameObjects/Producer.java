@@ -3,7 +3,7 @@ package GameObjects;
 import Core.Game;
 import UI.GameText;
 
-public class Producer extends Ordered implements GameObject, Clickable, Comparable<Producer> {
+public class Producer implements GameObject, Clickable, Comparable<Producer> {
     protected final String name;
 
     protected double production;
@@ -14,8 +14,7 @@ public class Producer extends Ordered implements GameObject, Clickable, Comparab
 
     protected int owned;
 
-    public Producer(final String name, final int pos, double production, double cost, int owned, Type product, Type costType) {
-        super(pos);
+    public Producer(final String name, double production, double cost, int owned, Type product, Type costType) {
         this.name = name;
         this.production = production;
         this.cost = cost;

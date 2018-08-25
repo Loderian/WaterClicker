@@ -20,21 +20,21 @@ public class Game extends Application {
     volatile static FixedUpdater fixedUpdater;
     volatile static Window gameWindow;
     volatile static AppController ui;
-    volatile static HashMap<String, Producer> producers;
-    volatile static HashMap<Type, Currency> currencies;
+    volatile static LinkedHashMap<String, Producer> producers;
+    volatile static LinkedHashMap<Type, Currency> currencies;
     volatile static Stats stats;
 
     public static void main(String[] args) {
         controller = null;
-        producers = new HashMap<>();
-        currencies = new HashMap<>();
+        producers = new LinkedHashMap<>();
+        currencies = new LinkedHashMap<>();
         stats = new Stats(0);
 
         currencies.put(Type.WATER, new Water());
         currencies.put(Type.MONEY, new Money());
 
-        producers.put("bucket", new Producer("Bucket", 0, 0.1, 1.0, 0, Type.WATER, Type.WATER));
-        producers.put("waterdistiller", new Producer("Water Distiller", 1, 5, 20, 0, Type.WATER, Type.WATER));
+        producers.put("bucket", new Producer("Bucket", 0.1, 1.0, 0, Type.WATER, Type.WATER));
+        producers.put("waterdistiller", new Producer("Water Distiller", 5, 20, 0, Type.WATER, Type.WATER));
 
         ArrayList<GameObject> allObjects = new ArrayList<>();
         allObjects.addAll(currencies.values());

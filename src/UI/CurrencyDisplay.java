@@ -8,7 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 
 
-public class CurrencyDisplay extends ImageDisplay implements Comparable<CurrencyDisplay> {
+public class CurrencyDisplay extends ImageDisplay {
     protected GameText bank;
     protected GameText production;
     protected Type type;
@@ -37,10 +37,5 @@ public class CurrencyDisplay extends ImageDisplay implements Comparable<Currency
         box.setAlignment(Pos.CENTER);
 
         return box;
-    }
-
-    @Override
-    public int compareTo(CurrencyDisplay o) {
-        return this.currency.getPos() - o.currency.getPos();
     }
 }

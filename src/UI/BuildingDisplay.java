@@ -10,7 +10,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 
-public class BuildingDisplay extends ImageDisplay implements Comparable<BuildingDisplay> {
+public class BuildingDisplay extends ImageDisplay {
     protected GameText name;
     protected GameText owned;
     protected GameText cost;
@@ -54,11 +54,6 @@ public class BuildingDisplay extends ImageDisplay implements Comparable<Building
         box.setOnMouseClicked(event -> producer.buy());
 
         return box;
-    }
-
-    @Override
-    public int compareTo(BuildingDisplay o) {
-        return this.producer.getPos() - o.producer.getPos();
     }
 
     public static void addHover(Node buildingBox, HBox hoverBox) {

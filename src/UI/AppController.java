@@ -56,23 +56,16 @@ public class AppController {
 
         currencies = new ArrayList<>();
         for(Map.Entry<Type, Currency> m : Game.getCurrenciesMap().entrySet()) {
-            currencies.add(new CurrencyDisplay(ImageDisplay.getImagePath(m.getKey().toString()), m.getValue().getType()));
-        }
-
-        Collections.sort(currencies);
-
-        for(CurrencyDisplay cd : currencies) {
-            currencyBox.getChildren().add(cd.build());
+            CurrencyDisplay currency = new CurrencyDisplay(ImageDisplay.getImagePath(m.getKey().toString()), m.getValue().getType());
+            currencies.add(currency);
+            currencyBox.getChildren().add(currency.build());
         }
 
         buildings = new ArrayList<>();
         for(Map.Entry<String, Producer> m : Game.getProducersMap().entrySet()) {
-            buildings.add(new BuildingDisplay(m.getValue(), ImageDisplay.getImagePath(m.getKey())));
-        }
+            BuildingDisplay bd = new BuildingDisplay(m.getValue(), ImageDisplay.getImagePath(m.getKey()));
+            buildings.add(bd);
 
-        Collections.sort(buildings);
-
-        for(BuildingDisplay bd : buildings) {
             HBox buildingBox = (HBox) bd.build();
             HBox hoverBox = bd.buildHover();
             buildingBox.setMaxWidth(300);
@@ -83,7 +76,6 @@ public class AppController {
 
             BuildingDisplay.addHover(buildingBox, hoverBox);
         }
-
     }
 
     public void update() {

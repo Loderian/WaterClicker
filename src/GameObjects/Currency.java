@@ -5,14 +5,13 @@ import UI.GameText;
 
 import java.util.Collection;
 
-abstract public class Currency extends Ordered implements GameObject {
+abstract public class Currency implements GameObject {
     protected double bank;
     protected double production;
     protected double total;
     protected Type type;
 
-    public Currency(final int pos, double bank, Type type) {
-        super(pos);
+    public Currency(double bank, Type type) {
         this.bank = bank;
         this.type = type;
         calcProduction();

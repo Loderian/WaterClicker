@@ -2,7 +2,7 @@ package GameObjects;
 
 public class Money extends Currency {
     public Money() {
-        super(0, 0, Type.MONEY);
+        super(0, Type.MONEY);
     }
 
     @Override
