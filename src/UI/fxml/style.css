@@ -1,0 +1,18 @@
+.menu {
+  -fx-padding: 10 0 10 0;
+}
+
+.menu .button {
+
+}
+
+.button {
+  -fx-background-color: blue;
+  -fx-border-color: white;
+  -fx-border-radius: 1;
+  -fx-effect: null;
+}
+
+.button GameText {
+  -fx-text-fill: white;
+}

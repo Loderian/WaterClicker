@@ -9,4 +9,9 @@ public class Money extends Currency {
     public void fixedUpdate() {
 
     }
+
+    @Override
+    public String printRate() {
+        return "";
+    }
 }

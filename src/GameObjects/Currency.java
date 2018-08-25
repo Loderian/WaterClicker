@@ -7,6 +7,7 @@ import java.util.Collection;
 
 abstract public class Currency implements GameObject {
     private static final double epsilon = 1e-9;
+    protected static double transaction = 0.1;
     protected double bank;
     protected double production;
     protected double total;
@@ -85,6 +86,8 @@ abstract public class Currency implements GameObject {
         return String.format("Per second: %s %s", GameText.formatDouble(production), getMidfix());
     }
 
+    abstract public String printRate();
+
     public String printTotal() {
         return String.format("Total %s collected: %s %s\n", type, GameText.formatDouble(total), getMidfix());
     }
@@ -102,7 +105,7 @@ abstract public class Currency implements GameObject {
         }
     }
 
-    static double getRate(Type sell) {
+    public static double getRate(Type sell) {
         switch (sell) {
             case WATER:
                 return 1;
@@ -111,5 +114,12 @@ abstract public class Currency implements GameObject {
                 return 5;
         }
         return 0;
+    }
+
+    public static Void setTransaction(String input) {
+        if (input.charAt(input.length()-1) == '%') {
+            transaction = Integer.parseInt(input.substring(0,input.length()-1))/100.0;
+        }
+        return null;
     }
 }

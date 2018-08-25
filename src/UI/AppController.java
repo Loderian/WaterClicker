@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 public class AppController {
     @FXML
@@ -22,6 +23,9 @@ public class AppController {
 
     @FXML
     private VBox currencyBox;
+
+    @FXML
+    private HBox currencyMenu;
 
     @FXML
     private VBox middleBox;
@@ -52,6 +56,11 @@ public class AppController {
         hoverBox.setMaxWidth(400);
 
         buildingMenu.setMinHeight(30);
+
+        for(String s : new String[]{"10%", "25%", "50%", "100%"}) {
+            GameButton g = new GameButton(s, 24, Currency::setTransaction);
+            currencyMenu.getChildren().add(g.build());
+        }
 
         currencies = new ArrayList<>();
         for(Map.Entry<Type, Currency> m : Game.getCurrenciesMap().entrySet()) {

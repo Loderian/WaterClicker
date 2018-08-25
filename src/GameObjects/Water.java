@@ -1,6 +1,7 @@
 package GameObjects;
 
 import Core.Game;
+import UI.GameText;
 
 public class Water extends Currency implements Clickable {
     public Water() {
@@ -21,7 +22,7 @@ public class Water extends Currency implements Clickable {
 
     @Override
     public void rightClick() {
-        sell(1.0);
+        sell(bank * transaction);
     }
 
     @Override
@@ -32,5 +33,10 @@ public class Water extends Currency implements Clickable {
     @Override
     public void fixedUpdate() {
 
+    }
+
+    @Override
+    public String printRate() {
+        return String.format("1.0 %s is worth %s %s", getMidfix(), GameText.formatDouble(getRate(this.type)), Game.getCurrency(Type.MONEY).getType());
     }
 }
