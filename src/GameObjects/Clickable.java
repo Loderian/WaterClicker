@@ -1,5 +1,7 @@
 package GameObjects;
 
 public interface Clickable {
-    void click();
+    void leftClick();
+
+    void rightClick();
 }

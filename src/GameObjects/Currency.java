@@ -6,6 +6,7 @@ import UI.GameText;
 import java.util.Collection;
 
 abstract public class Currency implements GameObject {
+    private static final double epsilon = 1e-9;
     protected double bank;
     protected double production;
     protected double total;
@@ -29,6 +30,9 @@ abstract public class Currency implements GameObject {
 
     public void sub(double amount) {
         this.bank -= amount;
+        if (this.bank < -0) {
+            this.bank = 0;
+        }
     }
 
     public double getBank() {
@@ -69,6 +73,10 @@ abstract public class Currency implements GameObject {
                 "} " + super.toString();
     }
 
+    public boolean canUse(Double d) {
+        return this.bank - ((d) - epsilon) >= 0.0;
+    }
+
     public String printBank() {
         return String.format("%s %s %s", GameText.formatDouble(bank), getMidfix(), this.type.toString());
     }
@@ -94,5 +102,14 @@ abstract public class Currency implements GameObject {
         }
     }
 
+    static double getRate(Type sell) {
+        switch (sell) {
+            case WATER:
+                return 0.1;
 
+            case FOOD:
+                return 0.5;
+        }
+        return 0;
+    }
 }

@@ -5,6 +5,7 @@ import GameObjects.Clickable;
 import GameObjects.Currency;
 import GameObjects.Type;
 import javafx.geometry.Pos;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 
 
@@ -22,7 +23,14 @@ public class CurrencyDisplay extends ImageDisplay {
         this.currency = Game.getCurrency(type);
 
         if (this.currency instanceof Clickable) {
-            image.setOnMouseClicked(event -> ((Clickable) this.currency).click());
+            image.setOnMouseClicked(event -> {
+                if (event.getButton() == MouseButton.PRIMARY) {
+                    ((Clickable) this.currency).leftClick();
+                }
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    ((Clickable) this.currency).rightClick();
+                }
+            });
         }
     }
 

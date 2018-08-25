@@ -53,8 +53,8 @@ public class Producer implements GameObject, Clickable, Comparable<Producer> {
 
     public void buy() {
         Currency c = Game.getCurrency(costType);
-        if (c.getBank() - (getCost() - 0.0000001) >= 0.0) {
-            Game.getCurrency(costType).sub(getCost());
+        if (c.canUse(getCost())) {
+            c.sub(getCost());
             owned++;
         }
     }
@@ -78,8 +78,13 @@ public class Producer implements GameObject, Clickable, Comparable<Producer> {
     }
 
     @Override
-    public void click() {
+    public void leftClick() {
         buy();
+    }
+
+    @Override
+    public void rightClick() {
+
     }
 
     @Override
