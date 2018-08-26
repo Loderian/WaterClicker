@@ -6,8 +6,7 @@
           xmlns:fx="http://javafx.com/fxml" alignment="TOP_CENTER" hgap="10" gridLinesVisible="true"
           stylesheets="@style.css"  >
     <VBox fx:id="currencyBox" alignment="TOP_CENTER"
-          GridPane.columnIndex="0" GridPane.rowIndex="0"
-          style="-fx-background-color: lightblue;">
+          GridPane.columnIndex="0" GridPane.rowIndex="0">
         <HBox fx:id="currencyMenu" styleClass="menu" alignment="BASELINE_CENTER" >
 
         </HBox>

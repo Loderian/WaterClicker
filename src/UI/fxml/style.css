@@ -7,12 +7,8 @@
 }
 
 .button {
-  -fx-background-color: blue;
-  -fx-border-color: white;
-  -fx-border-radius: 1;
-  -fx-effect: null;
-}
-
-.button GameText {
-  -fx-text-fill: white;
+  -fx-background-color: lightblue;
+  -fx-border-color: lightblue;
+  -fx-border-width: 2;
+  -fx-border-radius: 3;
 }
