@@ -25,9 +25,6 @@ public class AppController {
     private VBox currencyBox;
 
     @FXML
-    private HBox currencyMenu;
-
-    @FXML
     private VBox middleBox;
 
     @FXML
@@ -57,10 +54,14 @@ public class AppController {
 
         buildingMenu.setMinHeight(30);
 
+        ButtonGroup cbuttons = new ButtonGroup();
+
         for(String s : new String[]{"10%", "25%", "50%", "100%"}) {
-            GameButton g = new GameButton(s, 24, Currency::setTransaction);
-            currencyMenu.getChildren().add(g.build());
+            GameButton g = new GameButton(s, 18, Currency::setTransaction);
+            cbuttons.add(g);
         }
+
+        currencyBox.getChildren().add(cbuttons.build());
 
         currencies = new ArrayList<>();
         for(Map.Entry<Type, Currency> m : Game.getCurrenciesMap().entrySet()) {

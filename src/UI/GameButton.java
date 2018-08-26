@@ -25,6 +25,22 @@ public class GameButton implements Builder<HBox> {
         this.event = event;
     }
 
+    public String getEvent() {
+        return event;
+    }
+
+    public void doAction() {
+        func.apply(event);
+    }
+
+    public void activate() {
+        buttonText.setFill(Paint.valueOf("white"));
+    }
+
+    public void deactivate() {
+        buttonText.setFill(Paint.valueOf("grey"));
+    }
+
     @Override
     public HBox build() {
         HBox button = new HBox(buttonText);
@@ -32,7 +48,7 @@ public class GameButton implements Builder<HBox> {
         button.setOnMouseClicked(e -> func.apply(this.event));
         button.getStyleClass().add("button");
         button.setPadding(new Insets(5, 7, 5, 7));
-        HBox.setMargin(button,new Insets(0, 5, 0, 0));
+        HBox.setMargin(button, new Insets(0, 5, 0, 0));
         return button;
     }
 }

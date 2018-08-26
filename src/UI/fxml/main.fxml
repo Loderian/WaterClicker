@@ -7,9 +7,6 @@
           stylesheets="@style.css"  >
     <VBox fx:id="currencyBox" alignment="TOP_CENTER"
           GridPane.columnIndex="0" GridPane.rowIndex="0">
-        <HBox fx:id="currencyMenu" styleClass="menu" alignment="BASELINE_CENTER" >
-
-        </HBox>
 
     </VBox>
     <StackPane GridPane.columnIndex="1" GridPane.rowIndex="0"
