@@ -4,6 +4,7 @@ import GameObjects.Producer;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -47,12 +48,22 @@ public class ProducerDisplay extends ImageDisplay {
         ImageDisplay costImg = new ImageDisplay(14, 14, producer.getCostType().toString());
         HBox costBox = new HBox(cost, costImg.build());
         VBox nameBox = new VBox(name, costBox);
+        if (this instanceof CollectorDisplay) {
+            nameBox.getChildren().add(((CollectorDisplay) this).bank);
+        }
         nameBox.setAlignment(Pos.TOP_LEFT);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
 
         HBox box = new HBox(10, super.build(), nameBox, owned);
         box.setPadding(new Insets(5, 10, 5, 10));
-        box.setOnMouseClicked(event -> producer.buy());
+        box.setOnMouseClicked(event -> {
+            if (event.getButton() == MouseButton.PRIMARY) {
+                this.producer.leftClick();
+            }
+            if (event.getButton() == MouseButton.SECONDARY) {
+                this.producer.rightClick();
+            }
+        });
 
         return box;
     }

@@ -1,6 +1,7 @@
 package UI;
 
 import Core.Game;
+import GameObjects.Collector;
 import GameObjects.Currency;
 import GameObjects.Producer;
 import GameObjects.Type;
@@ -72,7 +73,13 @@ public class AppController {
 
         buildings = new ArrayList<>();
         for(Map.Entry<String, Producer> m : Game.getProducersMap().entrySet()) {
-            ProducerDisplay bd = new ProducerDisplay(m.getValue(), m.getKey());
+            ProducerDisplay bd;
+            if (m.getValue() instanceof Collector) {
+                bd = new CollectorDisplay((Collector) m.getValue(), m.getKey());
+            }
+            else {
+                bd = new ProducerDisplay(m.getValue(), m.getKey());
+            }
             buildings.add(bd);
 
             HBox buildingBox = (HBox) bd.build();

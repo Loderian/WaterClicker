@@ -3,7 +3,7 @@ package GameObjects;
 public enum Type {
     WATER ("water"),
     FOOD ("food"),
-    MONEY ("kr");
+    MONEY ("$");
 
     private final String name;
 

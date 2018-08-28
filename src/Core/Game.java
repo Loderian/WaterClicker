@@ -3,22 +3,19 @@ package Core;
 import GameObjects.*;
 import GameObjects.Currency;
 import UI.AppController;
-import UI.Window;
 import javafx.application.Application;
-import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 import java.util.*;
 
 public class Game extends Application {
+    public static final double epsilon = 1e-9;
     volatile static Updater controller;
     volatile static FixedUpdater fixedUpdater;
-    volatile static Window gameWindow;
     volatile static AppController ui;
     volatile static LinkedHashMap<String, Producer> producers;
     volatile static LinkedHashMap<Type, Currency> currencies;
@@ -33,8 +30,8 @@ public class Game extends Application {
         currencies.put(Type.WATER, new Water());
         currencies.put(Type.MONEY, new Money());
 
-        producers.put("bucket", new Producer("Bucket", 0.1, 1.0, 0, Type.WATER, Type.MONEY));
-        producers.put("waterdistiller", new Producer("Water Distiller", 5, 20, 0, Type.WATER, Type.MONEY));
+        producers.put("bucket", new Collector("Bucket", 0.1, 1.0, 0, Type.WATER, Type.MONEY, 10));
+        producers.put("waterdistiller", new Collector("Water Distiller", 1, 20, 0, Type.WATER, Type.MONEY, 5));
 
         ArrayList<GameObject> allObjects = new ArrayList<>();
         allObjects.addAll(currencies.values());
@@ -60,8 +57,7 @@ public class Game extends Application {
             ui.init(primaryStage);
 
             controller.setUI(ui);
-
-            gameWindow = new Window(primaryStage);
+            primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
             exit();

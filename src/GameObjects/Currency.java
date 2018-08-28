@@ -6,7 +6,6 @@ import UI.GameText;
 import java.util.Collection;
 
 abstract public class Currency implements GameObject {
-    private static final double epsilon = 1e-9;
     protected static double transaction = 0.1;
     protected double bank;
     protected double production;
@@ -75,7 +74,7 @@ abstract public class Currency implements GameObject {
     }
 
     public boolean canUse(Double d) {
-        return this.bank - ((d) - epsilon) >= 0.0;
+        return this.bank - ((d) - Game.epsilon) >= 0.0;
     }
 
     public String printBank() {

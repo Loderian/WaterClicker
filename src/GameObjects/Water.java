@@ -17,7 +17,7 @@ public class Water extends Currency implements Clickable {
 
     @Override
     public void leftClick() {
-        add(0.1);
+        add(0.05);
     }
 
     @Override
