@@ -1,19 +1,34 @@
 package UI;
 
 import GameObjects.Collector;
-import GameObjects.Producer;
+
+import javafx.scene.Node;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class CollectorDisplay extends ProducerDisplay {
-    protected GameText bank;
+    protected ProgressTextBar progressbar;
 
     public CollectorDisplay(Collector p, String imageName) {
         super(p, imageName);
-        bank = new GameText(p.printBank(),14);
+        progressbar = new ProgressTextBar(p.printBank(), 10, 150);
     }
 
     @Override
     public void update() {
+        if (producer.getOwned() <= 0) {
+            return;
+        }
         super.update();
-        bank.setText(((Collector) producer).printBank());
+        double progress = ((Collector) producer).getBank() / ((Collector) producer).getCapacity();
+        progressbar.update(((Collector) producer).printBank(), progress);
+    }
+
+    @Override
+    public Node build() {
+        VBox nameBox = buildNameBox();
+        nameBox.getChildren().add(new HBox(progressbar.build()));
+
+        return buildMainBox(nameBox);
     }
 }

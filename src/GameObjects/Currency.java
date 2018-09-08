@@ -66,7 +66,7 @@ abstract public class Currency implements GameObject {
     @Override
     public String toString() {
         return "Currency{" +
-                "bank=" + bank +
+                "progressbar=" + bank +
                 ", production=" + production +
                 ", total=" + total +
                 ", type=" + type +

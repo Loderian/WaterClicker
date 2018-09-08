@@ -12,3 +12,7 @@
   -fx-border-width: 2;
   -fx-border-radius: 3;
 }
+
+.progress-bar {
+  -fx-background-color: forestgreen;
+}

@@ -28,6 +28,9 @@ public class ProducerDisplay extends ImageDisplay {
     }
 
     public void update() {
+        if (producer.getOwned() <= 0) {
+            return;
+        }
         this.cost.setText("" + GameText.formatDouble(producer.getCost()));
         this.owned.setText("" + producer.getOwned());
         this.details.update(getStats());
@@ -43,18 +46,18 @@ public class ProducerDisplay extends ImageDisplay {
         return str;
     }
 
-    @Override
-    public Node build() {
+    public VBox buildNameBox() {
         ImageDisplay costImg = new ImageDisplay(14, 14, producer.getCostType().toString());
         HBox costBox = new HBox(cost, costImg.build());
         VBox nameBox = new VBox(name, costBox);
-        if (this instanceof CollectorDisplay) {
-            nameBox.getChildren().add(((CollectorDisplay) this).bank);
-        }
         nameBox.setAlignment(Pos.TOP_LEFT);
         HBox.setHgrow(nameBox, Priority.ALWAYS);
 
-        HBox box = new HBox(10, super.build(), nameBox, owned);
+        return nameBox;
+    }
+
+    public HBox buildMainBox(VBox name) {
+        HBox box = new HBox(10, super.build(), name, owned);
         box.setPadding(new Insets(5, 10, 5, 10));
         box.setOnMouseClicked(event -> {
             if (event.getButton() == MouseButton.PRIMARY) {
@@ -66,6 +69,11 @@ public class ProducerDisplay extends ImageDisplay {
         });
 
         return box;
+    }
+
+    @Override
+    public Node build() {
+        return buildMainBox(buildNameBox());
     }
 
     public static void addHover(Node buildingBox, HBox hoverBox) {

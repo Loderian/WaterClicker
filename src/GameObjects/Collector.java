@@ -17,6 +17,10 @@ public class Collector extends Producer {
         return capacity * owned;
     }
 
+    public double getBank() {
+        return bank;
+    }
+
     public void add(double amount) {
         bank += amount;
         if (bank > getCapacity()) {
